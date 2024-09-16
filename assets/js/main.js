@@ -201,4 +201,104 @@
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
 
+
+// Initialize EmailJS with your user ID
+emailjs.init("NXS1KT_AQSkAHBT7S");
+
+// Get reference to the form element
+const form = document.getElementById("myForm");
+const booking_form = document.getElementById("book_table_form");
+
+// Attach an event listener to the form's submit event
+form.addEventListener("submit", function(event) {
+event.preventDefault(); // Prevent the default form submission
+
+// Get form values
+const to = document.getElementById("to").value;
+const from_name = document.getElementById("from_name").value;
+const subject = document.getElementById("subject").value;
+const message = document.getElementById("message").value;
+const params = {
+  from_name,
+  to,
+  subject,
+  message
+}
+
+console.log(params)
+
+// Use the EmailJS send method
+emailjs.send("service_5ms2qqn", "template_sbpjb2z", {
+subject: subject,
+name: from_name,
+message: message,
+reply_to: to,
+})
+.then(function(response) {
+Swal.fire({
+icon: 'success',
+title: 'Done',
+text: 'Votre message a été envoyé.',
+footer: '<a href="">Merci !</a>'
+})
+}, function(error) {
+alert("Email not sent:");
+
+});
+
+// Use the EmailJS send method for table reservation
+
+
+});
+booking_form.addEventListener("submit", function(event) {
+event.preventDefault(); // Prevent the default form submission
+
+// Get form values
+const booking_name = document.getElementById("booking_name").value;
+const booking_email = document.getElementById("booking_email").value;
+const booking_phone = document.getElementById("booking_phone").value;
+const booking_date = document.getElementById("booking_date").value;
+const booking_time = document.getElementById("booking_time").value;
+const booking_people = document.getElementById("booking_people").value;
+const booking_message = document.getElementById("booking_message").value;
+const params = {
+  booking_name,
+  booking_email,
+  booking_phone,
+  booking_date,
+  booking_time,
+  booking_people,
+  booking_message
+}
+
+console.log(params)
+
+// Use the EmailJS send method
+emailjs.send("service_5ms2qqn", "template_xt45ndf", {
+  name: booking_name,
+  message: booking_message,
+  phone: booking_phone,
+reply_to: booking_email,
+persons: booking_people, 
+date: booking_date, 
+time: booking_time, 
+})
+.then(function(response) {
+Swal.fire({
+icon: 'success',
+title: 'Done',
+text: 'Votre demande de réservation a été envoyée. Nous vous rappellerons ou vous enverrons un Email pour confirmer votre réservation.',
+footer: '<a href="">Merci !</a>'
+})
+}, function(error) {
+alert("Réservation non envoyée");
+console.log(error)
+
+});
+
+// Use the EmailJS send method for table reservation
+
+
+});
+
 })();
