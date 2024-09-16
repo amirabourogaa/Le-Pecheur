@@ -296,7 +296,7 @@ console.log(error)
 
 });
 
-// Use the EmailJS send method for table reservation
+
 
 
 });
